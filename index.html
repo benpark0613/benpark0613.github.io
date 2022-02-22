@@ -70,11 +70,11 @@
             </div>
             <div id="carouselContent" class="carousel slide" data-ride="carousel" data-aos="fade-up" data-aos-delay="200">
               <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active p-0" data-interval="100000">
-                  <div class="row d-flex justify-content-center">
+                <div class="carousel-item active py-5 py-lg-0" data-interval="100000">
+                  <div class="row d-flex justify-content-center py-5 py-lg-0">
                     <div class="col-lg-5">
                       <div class="card border-0">
-                        <div class="card-body">
+                        <div class="card-body px-5">
                           <p class="card-text text-dark">창업 동아리 활동을 하며 구현단계에서 좌절한 적이 있습니다. 아무리 멋진 아이디어도 구현하지 않으면 빛날 수 없다는 것을 깨달았습니다. <br /><br />마케팅 회사에서 일하며 자동화 프로그램이 있었다면 한시간 안에 끝낼 일을 몇 주 동안 수작업으로 진행한 적이 있습니다. <br /><br />이제는 제가 프로그래밍이란 멋진 도구로 사람들에게 더 나은 비즈니스 환경과 가치를 제공할 수 있는 개발자가 되기 위해 노력하고 있습니다.</p>
                         </div>
                       </div>
@@ -82,15 +82,15 @@
                   </div>
                 </div>
 
-                <div class="carousel-item p-0" data-interval="100000">
+                <div class="carousel-item py-lg-5 py-3" data-interval="100000">
                   <div class="row d-flex justify-content-center">
-                    <div class="col-8">
-                      <table class="table table-borderless">
-                        <tbody class="">
+                    <div class="col-lg-8 px-5">
+                      <table class="table table-borderless m-0">
+                        <tbody>
                           <tr class="d-flex flex-wrap">
                             <td class="col-lg-4"><span class="icon-user-circle mr-2"></span>박성근</td>
                             <td class="col-lg-4"><span class="icon-birthday-cake mr-2"></span>91.06.13</td>
-                            <td class="col-lg-4"><span class="icon-school mr-2"></span>중앙대학교 영어영문학과</td>
+                            <td class="col-lg-4 text-nowrap"><span class="icon-school mr-2"></span>중앙대학교 영어영문학과</td>
                           </tr>
                           <tr class="d-flex flex-wrap">
                             <td class="col-lg-4"><span class="icon-room mr-2"></span>서울특별시 송파구</td>
@@ -98,21 +98,21 @@
                             <td class="col-lg-4"><span class="icon-envelope mr-2"></span>benpark0613@outlook.com</td>
                           </tr>
                           <tr class="d-flex flex-wrap">
-                            <td colspan="4"><span class="icon-school mr-2"></span>중앙HTA 웹개발 과정 수료 (2021.08.30 ~ 2022.02.15)</td>
+                            <td class="col-lg-12"><span class="icon-school mr-2"></span>중앙HTA 웹개발 과정 수료 (2021.08.30 ~ 2022.02.15)</td>
                           </tr>
                           <tr class="d-flex flex-wrap">
-                            <td colspan="4">
-                              <a class="text-dark" href="https://github.com/benpark0613" target="_blank">
-                                <span class="icon-github mr-2"></span>
-                                <span>소스 코드 저장소 입니다.</span>
+                            <td class="col-lg-12">
+                              <a class="text-dark" href="https://memory-storage-center.tistory.com/" target="_blank">
+                                <span class="icon-web mr-1"></span>
+                                <span>공부한 내용과 작업 중 실수한 내용을 정리한 블로그입니다.</span>
                               </a>
                             </td>
                           </tr>
                           <tr class="d-flex flex-wrap">
-                            <td colspan="4">
-                              <a class="text-dark" href="https://memory-storage-center.tistory.com/" target="_blank">
-                                <span class="icon-web mr-2"></span>
-                                <span>공부한 내용을 기록하기 위한 블로그 입니다.</span>
+                            <td class="col-lg-12">
+                              <a class="text-dark" href="https://github.com/benpark0613" target="_blank">
+                                <span class="icon-github mr-1"></span>
+                                <span>소스 코드 저장소입니다. 팀프로젝트와 토이프로젝트를 저장해두었습니다.</span>
                               </a>
                             </td>
                           </tr>
@@ -497,6 +497,27 @@
         $text.append(txt);
       }
       setInterval(typing, 150);
+
+      // 캐러셀 아이템 사이즈 같게
+      function normalizeSlideHeights() {
+        $(".carousel").each(function () {
+          var items = $(".carousel-item", this);
+          // reset the height
+          items.css("height", "auto");
+          // set the height
+          var maxHeight = Math.max.apply(
+            null,
+            items
+              .map(function () {
+                return $(this).outerHeight();
+              })
+              .get()
+          );
+          items.css("height", maxHeight + "px");
+        });
+      }
+
+      $(window).on("load resize orientationchange", normalizeSlideHeights);
     </script>
   </body>
 </html>
