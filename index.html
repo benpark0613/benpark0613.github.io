@@ -294,7 +294,10 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <div class="col-lg-7">
+          <div class="d-none spinner-border text-warning my-5" role="status" id="div-spinner"></div>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-7" id="div-contact-form">
             <form class="contact-form" data-aos="fade-up" data-aos-delay="100" id="contact-form">
               <input type="hidden" name="contact_number" />
               <div class="row">
@@ -413,17 +416,25 @@
             formData.append('template_id', 'template_3gtyfgi');
             formData.append('user_id', 'user_Ud0Xe0yQYZp5swqyq3CQJ');
         
-            $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
+            $.ajax({
                 type: 'POST',
+                url: 'https://api.emailjs.com/api/v1.0/email/send-form',
                 data: formData,
                 contentType: false, // auto-detection
-                processData: false // no need to parse formData to string
-            }).done(function() {
-                alert('연락주셔서 감사합니다. 24시간 이내 확인 후 꼭 회신드리겠습니다. 오늘도 좋은 하루 보내세요 :)');
-            }).fail(function(error) {
-                alert('오류가 발생하였습니다. 이럴리가 없는데... 만에 하나라도 이 메세지를 보신다면 화면 최하단의 메일로 연락을 주실 수 있으실까요...?' + JSON.stringify(error));
-          });
-
+                processData: false, // no need to parse formData to string
+                beforeSend: function() {
+                  $('#div-contact-form form').addClass('d-none');
+                  $('#div-spinner').removeClass('d-none');
+                },
+                success: function() {
+                  alert('연락주셔서 감사합니다. 24시간 이내 확인 후 꼭 회신드리겠습니다. 오늘도 좋은 하루 보내세요 :)');
+                  $('#div-contact-form form').removeClass('d-none');
+                  $('#div-spinner').addClass('d-none');
+                },
+                error: function(error) {
+                  alert('오류가 발생하였습니다. 이럴리가 없는데... 만에 하나라도 이 메세지를 보신다면 화면 최하단의 메일로 연락을 주실 수 있으실까요...?' + JSON.stringify(error));
+                }
+            });
         });
       };
     </script>
