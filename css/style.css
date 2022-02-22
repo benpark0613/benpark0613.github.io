@@ -1773,12 +1773,17 @@ h5 {
   filter: invert(100%);
 }
 
-.table-wrap {
-  height: 321.53px;
+/* 데스크탑일 때 캐러셀 아이템 높이 고정_버튼 높이조절용 */
+@media screen and (min-width: 769px) {
+  #about-section #carouselContent .col-8 {
+    height: 321.53px;
+  }
 }
 
-.table-wrap .table {
-  margin: 37px 0 0 0;
+@media screen and (max-width: 769px) {
+  #about-section #carouselContent .card-body {
+    height: 513.53px;
+  }
 }
 
 /* projects */
